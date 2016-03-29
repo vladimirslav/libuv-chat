@@ -1,0 +1,2 @@
+You will need libuv compiled and built to run it (go to http://libuv.org to get it).
+Put the built .a files into Thirdparty/Debug and Thirdparty/Release respectively. Put libuv include folder into Thirdparty folder
