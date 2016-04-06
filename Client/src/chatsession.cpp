@@ -67,11 +67,11 @@ ChatSession* ChatSession::GetInstance()
 
 void ChatSession::OnMsgSent(uv_write_t* req, int status)
 {
+    outgoing_queue.messages.pop();
+    outgoing_queue.requests.Release();
+
     if (status == 0)
     {
-        outgoing_queue.messages.pop();
-        outgoing_queue.requests.Release();
-
         if (sending_name)
         {
             sending_name = false;

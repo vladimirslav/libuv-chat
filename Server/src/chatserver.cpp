@@ -371,19 +371,14 @@ void ChatSession::FinishMessage()
 
 void ChatServer::OnMsgSent(uv_write_t* req, int status)
 {
-    if (status == 0)
+    if (msg_queue.messages.empty() == false)
     {
-        if (msg_queue.messages.empty() == false)
-        {
-            msg_queue.messages.pop();
-            msg_queue.requests.Release();
-        }
-        else
-        {
-        }
-
+        msg_queue.messages.pop();
+        msg_queue.requests.Release();
     }
-    else
+
+
+    if (status != 0)
     {
         Log("Error sending message! " + std::string(uv_strerror(status)));
     }
